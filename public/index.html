@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+    <meta name="format-detection" content="telephone=no, address=no, email=no">
+    <title>Satriad · Komik</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+    <div class="toast" id="toast"></div>
+
+    <div class="drawer-overlay" id="drawerOverlay"></div>
+    <div class="drawer" id="drawer">
+        <div class="drawer-header">
+            <h3>Menu</h3>
+            <div class="drawer-close" id="drawerClose"></div>
+        </div>
+        <div class="drawer-menu">
+            <div class="drawer-menu-item" id="menuFavorite">
+                <div class="drawer-menu-icon icon-favorite"></div>
+                <span>Favorit</span>
+            </div>
+            <div class="drawer-menu-item" id="menuRanking">
+                <div class="drawer-menu-icon icon-ranking"></div>
+                <span>Ranking</span>
+            </div>
+            <div class="drawer-menu-item" id="menuCategory">
+                <div class="drawer-menu-icon icon-category"></div>
+                <span>Kategori</span>
+            </div>
+            <div class="drawer-submenu" id="categorySubmenu">
+                <div class="category-grid-drawer" id="categoryList"></div>
+            </div>
+        </div>
+    </div>
+
+    <header>
+        <div class="gnb">
+            <h1 class="logo"><a href="#" id="logoHome"><span class="blind">Satriad</span></a></h1>
+            <div class="gnb_btn_area">
+                <div class="btn_search" id="searchBtn"></div>
+                <div class="btn_menu" id="menuBtn"></div>
+            </div>
+        </div>
+        <div class="search-container" id="searchContainer">
+            <div class="search-input-wrapper">
+                <div class="search-icon-svg"></div>
+                <input type="text" class="search-input" id="searchInput" placeholder="Cari judul komik...">
+                <div class="search-clear" id="searchClear"></div>
+            </div>
+            <div class="search-results" id="searchResults"></div>
+            <div class="search-back-btn" id="searchBackBtn">Kembali</div>
+        </div>
+        <div class="lnb-wrapper" id="navWrapper">
+            <ul class="lnb" id="mainNav">
+                <li class="item active" data-page="home"><a class="link">HOME</a></li>
+                <li class="item" data-page="ranking"><a class="link">RANKING</a></li>
+                <li class="item" data-page="favoritku"><a class="link">FAVORITKU</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <div class="page-container">
+        <div id="homePage" class="page active">
+            <main>
+                <div class="section_header">
+                    <h2 class="section_title">Lanjut Membaca</h2>
+                </div>
+                <div class="continue-reading-section" id="continueReadingSection" style="display: none;">
+                    <div class="continue-item" id="continueReadingItem">
+                        <div class="continue-thumb" id="continueThumb"></div>
+                        <div class="continue-info">
+                            <div class="continue-title" id="continueTitle"></div>
+                            <div class="continue-episode" id="continueEpisode"></div>
+                            <div class="continue-progress-text">Tap untuk melanjutkan</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section_header">
+                    <h2 class="section_title">Trending Manga</h2>
+                    <a href="#" class="see_all" data-page="ranking">Lihat Semua</a>
+                </div>
+                <ul class="webtoon_list" id="trendingList"></ul>
+
+                <div class="section_header">
+                    <h2 class="section_title">Manhwa Populer</h2>
+                </div>
+                <ul class="webtoon_list" id="manhwaList"></ul>
+
+                <div class="section_header">
+                    <h2 class="section_title">Manhua Terbaru</h2>
+                </div>
+                <ul class="webtoon_list" id="manhuaList"></ul>
+
+                <div class="section_header">
+                    <h2 class="section_title">Rekomendasi Manga</h2>
+                </div>
+                <div class="grid_3col" id="rekomendasiGrid"></div>
+            </main>
+        </div>
+
+        <div id="rankingPage" class="page">
+            <div class="genre-header"><h2>RANKING</h2><p>Komik Terpopuler</p></div>
+            <div class="loading-spinner" id="rankingLoading"></div>
+            <ul class="webtoon_list" id="rankingList"></ul>
+            <div class="load-more-container">
+                <button class="load-more-btn" id="loadMoreRanking">Muat Lebih Banyak</button>
+            </div>
+        </div>
+
+        <div id="favoritkuPage" class="page">
+            <div id="favoriteEmptyState" style="text-align:center; padding:60px 20px; display:none;">
+                <div class="empty-icon"></div>
+                <h3 style="font-size:18px;margin-bottom:8px;color:#666;">Belum ada favorit</h3>
+                <p style="color:#999;">Klik ikon hati di halaman detail untuk menambah favorit</p>
+            </div>
+            <ul class="webtoon_list" id="favoriteList" style="display:none;"></ul>
+        </div>
+
+        <div id="detailPage" class="page">
+            <div class="detail-header">
+                <div class="detail-back" id="detailBack"></div>
+                <div class="detail-title-header" id="detailTitleHeader"></div>
+                <div style="width:24px;"></div>
+            </div>
+            <div class="detail-poster" id="detailPoster"></div>
+            <div class="detail-info">
+                <div class="detail-genre" id="detailGenre"></div>
+                <p class="detail-desc" id="detailDesc"></p>
+                <div class="detail-stats">
+                    <span id="detailRating"></span>
+                    <span id="detailViews"></span>
+                </div>
+                <div class="favorite-btn-detail" id="detailFavoriteBtn">
+                    <div class="favorite-icon-detail"></div>
+                    <span id="favoriteBtnText">Tambah ke Favorit</span>
+                </div>
+            </div>
+            <div class="episode-section">
+                <div class="episode-header">
+                    <span>Episode</span>
+                    <span id="episodeCount">0 Episode</span>
+                </div>
+                <div class="episode-list" id="episodeList"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="reader-mode" id="readerMode">
+        <div class="reader-header">
+            <div class="reader-close" id="readerClose"></div>
+            <div class="reader-title-header" id="readerTitle"></div>
+            <div style="width:24px;"></div>
+        </div>
+        <div class="reader-content" id="readerContent"></div>
+        <div class="reader-episode-thumbnails" id="readerThumbnails"></div>
+    </div>
+
+    <div class="age-verification-modal" id="ageVerificationModal">
+        <div class="age-verification-content">
+            <h3>Peringatan Konten</h3>
+            <p>Konten ini mengandung unsur 18+ (Dewasa).</p>
+            <p>Apakah Anda sudah berusia 18 tahun atau lebih?</p>
+            <div class="age-verification-buttons">
+                <button class="age-btn age-btn-yes" id="ageYesBtn">Ya, Saya 18+</button>
+                <button class="age-btn age-btn-no" id="ageNoBtn">Tidak, Di Bawah 18</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer_sosmed">
+            <div class="sosmed_icons">
+                <a href="https://whatsapp.com" target="_blank" class="sosmed_icon icon-wa"></a>
+                <a href="https://tiktok.com" target="_blank" class="sosmed_icon icon-tiktok"></a>
+                <a href="https://saweria.co" target="_blank" class="sosmed_icon icon-donasi"></a>
+            </div>
+            <span class="foot_logo"></span>
+            <p class="copyright">© Satriadevs</p>
+        </div>
+    </footer>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
